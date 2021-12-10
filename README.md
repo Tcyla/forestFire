@@ -1,6 +1,6 @@
 # forestFire : a cellular automaton
 ## Introduction
-A C++ implementation of [the cellular autimata](http://cormas.cirad.fr/fr/applica/fireautomata.htm) developed by Cormas 
+A C++ implementation of [the cellular automata](http://cormas.cirad.fr/fr/applica/fireautomata.htm) developed by the CORMAS.
 ## Installation
 This program have only be tested on Ubuntu 20.10. 
 ### Linux
