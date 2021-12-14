@@ -167,9 +167,6 @@ void ForestFire::getState(SDL_Rect view, int pixSize,
 
 }
 
-// step()
-// ------
-
 void ForestFire::setFire(int i, int j)
 {
     M_matrix -> setCoef('f', i, j);
