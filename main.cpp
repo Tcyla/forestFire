@@ -8,7 +8,7 @@ int main(int argc, char* args[])
 {
     try
     {
-	    g_game = new Game("Conway's Game of Life", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1200, 800, 0);
+	    g_game = new Game("Forest Fire", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1200, 800, 0);
     }catch(const char* e)
     {
         std::cout << e << std::endl;
