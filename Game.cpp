@@ -35,42 +35,34 @@ Game::Game(const char* title, int xpos, int ypos, int width, int height, int fla
 	{
 		throw "SDL init fail";
 	}
-	std::cout << "SDL OK" << std::endl; 
+	std::cout << "SDL OK" << std::endl;
 
 
     // ForestFire Initialisation
     // -------------------------
 
-    try 
+    try
     {
 
 		view = new View(width, height);
-		
+
 		forest_size = 0;
 		fire_size = 0;
 		ash_size = 0;
-		forest = new SDL_Rect[10];
-		fire = new SDL_Rect[10];
-		ash = new SDL_Rect[10];
-		
+
+		forest = new SDL_Rect[100000];
+		fire = new SDL_Rect[10000];
+		ash = new SDL_Rect[10000];
+
+
 		view -> getView(forest, forest_size, fire, fire_size, ash, ash_size);
-		
-		// for (int i = 0 ; i < forest_size ; ++i)
-		// 	{
-		// 		std::cerr << "forest[" << i << "] = {\n"
-		// 				  << "                 x: " << forest[i].x << ",\n"
-		// 				  << "                 y: " << forest[i].y << ",\n" 
-		// 				  << "                 w: " << forest[i].w << ",\n" 
-		// 				  << "                 h: " << forest[i].h << "\n"
-		// 				  << "                       }\n";
-		//  }
-		
+
     }catch(const char* e)
     {
-        throw e; 
+        throw e;
     }
 
-	std::cout << "Init OK" << std::endl; 
+	std::cout << "Init OK" << std::endl;
 
 	M_isRunning = true; // everything init'd successfully, start the main loop
 	pause = true;
@@ -82,16 +74,15 @@ void Game::render()
 	SDL_RenderClear(renderer); // clear the renderer to the draw color
 	// draw forest in green
     SDL_SetRenderDrawColor(renderer, 18, 148, 59, 255);
-	SDL_RenderDrawRects(renderer, forest, forest_size);
+//	SDL_RenderDrawRects(renderer, forest, forest_size);
 	SDL_RenderFillRects(renderer, forest, forest_size);
 	// draw fire in red
     SDL_SetRenderDrawColor(renderer, 148, 5, 3, 255);
-	SDL_RenderDrawRects(renderer, fire, fire_size);
+//	SDL_RenderDrawRects(renderer, fire, fire_size);
 	SDL_RenderFillRects(renderer, fire, fire_size);
-	
 	// draw ash in grey
     SDL_SetRenderDrawColor(renderer, 148, 148, 148, 255);
-	SDL_RenderDrawRects(renderer, ash, ash_size);
+//	SDL_RenderDrawRects(renderer, ash, ash_size);
 	SDL_RenderFillRects(renderer, ash, ash_size);
 
 	// draw Position on side
@@ -110,38 +101,57 @@ void Game::render()
 void Game::update()
 {
     if (!pause)
-    {
         view -> next();
 
-		try
-		{
-			view -> getView(forest, forest_size, fire, fire_size, ash, ash_size);
-			
-		}
-		catch(const char* e)
-		{
-			std::cout << e << std::endl;
-			M_isRunning = false;
-		}
+    try
+    {
+        view -> getView(forest, forest_size, fire, fire_size, ash, ash_size);
     }
+    catch(const char* e)
+    {
+        std::cout << e << std::endl;
+        M_isRunning = false;
+    }
+
 }
 
 void Game::handleKeyboardEvents(SDL_KeyboardEvent* event)
 {
-	switch (event->keysym.sym)
+	switch (event -> keysym.sym)
 	{
+	// Quit and Pause
 		case SDLK_p:
-		case SDLK_ESCAPE:
+		case SDLK_RETURN:
 			pause = !pause;
 			break;
+        case SDLK_ESCAPE:
+        case SDLK_q:
+            M_isRunning = false;
+            break;
+
+    //scale Up/Down
+        case SDLK_PLUS:
+        case SDLK_EQUALS:
+            view -> setScale(Up, 5);
+            break;
+        case SDLK_MINUS:
+            view -> setScale(Down, 5);
+            break;
+
+    // Move view
 		case SDLK_UP:
+            view -> moveView( Up );
 			break;
 		case SDLK_DOWN:
+            view -> moveView( Down );
 			break;
 		case SDLK_LEFT:
+            view -> moveView( Left );
 			break;
 		case SDLK_RIGHT:
+			view -> moveView( Right );
 			break;
+
 		default:
 			break;
 	}
@@ -190,7 +200,7 @@ void Game::handleEvents()
 				handleMouseButtonEvent(&event.button);
 				break;
 			default:
-			break;
+                break;
 		}
 	}
 }
@@ -199,10 +209,10 @@ Game::~Game()
 {
 	delete [] forest;
 	delete [] fire;
-	delete [] ash; 
+	delete [] ash;
     delete view;
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
-	std::cout << "Deletes OK" << std::endl; 
+	std::cout << "Deletes OK" << std::endl;
 }

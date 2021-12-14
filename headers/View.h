@@ -11,10 +11,10 @@
  * To do:
  * - setFire()
  * - Loc indic°
- * 
+ *
  */
 
-enum Direction { Up, Down, Left, Right}; 
+enum Direction { Up, Down, Left, Right};
 
 class View
 {
@@ -23,19 +23,19 @@ class View
 		SDL_Rect M_view;
 
         ForestFire* forestfire;
-		
-	public: 
-		
+
+	public:
+
 		View(int, int);
 		~View();
 
 		void setScale( int );
 		void setScale( Direction, int );
-		void moveView( Direction, int );
+		void moveView( Direction );
 
 		void setFire(int x, int y)
 		{
-			
+			forestfire -> setFire(y/M_pixSize,x/M_pixSize);
 		}
 
         void getView(SDL_Rect* forest, int& forest_size,
@@ -49,10 +49,10 @@ class View
 		}
 
 		void getLoc();
-		
+
 		void next()
 		{
-			forestfire -> step(); 
+			forestfire -> step();
 		}
 
 };

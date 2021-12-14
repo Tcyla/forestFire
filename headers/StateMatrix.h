@@ -10,28 +10,27 @@ class StateMatrix
 					 //                 'w': wood (forest in the original model)
 					 //					'f': fire
 					 //                 'a': ash
-	
+
 	int M_col;
-	int M_row; 
-	
+	int M_row;
+
 	int forest_count;
 	int fire_count;
 	int ash_count;
 
 	void inc_dec(bool, int&);
-	void modStateCount(bool,int, int);
+	void modStateCount(bool, int, int);
 
 public:
-	// 
+	//
 
 	StateMatrix();
 	~StateMatrix();
 
-
 	StateMatrix( int, int );
 	StateMatrix( const StateMatrix& );
 
-	// 
+	//
 
 	void empty();
 
@@ -47,12 +46,12 @@ public:
 	int ash() const { return forest_count; }
 
 	// .. Assimilées
-	
+
 	int size() const { return M_row * M_col; }
-	
+
 	// operators
-	
-	char operator()( int, int ); 
+
+	char operator()( int, int );
 	void setCoef(char, int, int);
 
 };
