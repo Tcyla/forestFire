@@ -110,27 +110,38 @@ ForestFire::ForestFire(int row, int col)
  *********************************************************************/
 
 
+void newRects(SDL_Rect*& rect, int& rect_size, int maxSize)
+{
+	SDL_Rect* tmp = rect;
+	rect = nullptr;
+	delete [] tmp;
+
+	rect_size = 0;
+	rect = new SDL_Rect[maxSize];
+}
+
 void setRectAttr(int pixSize, SDL_Rect* state, int& state_size, int i, int j, SDL_Rect view)
 {
 	state[state_size].h = pixSize;
 	state[state_size].w = pixSize;
-	state[state_size].x = j * pixSize - view.x;
-    state[state_size].y = i * pixSize - view.y;
+	state[state_size].x = (j - view.x) * pixSize;
+    state[state_size].y = (i - view.y) * pixSize ;
     ++state_size;
 
 
 }
 
 void ForestFire::getState(SDL_Rect view, int pixSize,
-						  SDL_Rect* forest, int& forest_size,
-						  SDL_Rect* fire, int& fire_size,
-						  SDL_Rect* ash, int& ash_size)
+						  SDL_Rect*& forest, int& forest_size,
+						  SDL_Rect*& fire, int& fire_size,
+						  SDL_Rect*& ash, int& ash_size)
 {
 
-	forest_size = 0;
-	fire_size = 0;
-	ash_size = 0;
-
+	std::cout << "forest = " << forest << "\n";
+	newRects(forest, forest_size, M_matrix -> forest());
+	newRects(fire, fire_size, M_matrix -> fire());
+	newRects(ash, ash_size, M_matrix -> ash());
+	std::cout << "forest = " << forest << "\n";
 	char state;
 	for ( int i = view.y ; i < (view.y + view.h) ; ++i )
 	{

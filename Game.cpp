@@ -50,12 +50,14 @@ Game::Game(const char* title, int xpos, int ypos, int width, int height, int fla
 		fire_size = 0;
 		ash_size = 0;
 
-		forest = new SDL_Rect[100000];
-		fire = new SDL_Rect[10000];
-		ash = new SDL_Rect[10000];
-
+		forest = new SDL_Rect[2];
+		fire = new SDL_Rect[2];
+		ash = new SDL_Rect[2];
+		std::cout << "forest = " << forest << "\n";
 
 		view -> getView(forest, forest_size, fire, fire_size, ash, ash_size);
+
+		std::cout << "forest = " << forest << "\n";
 
     }catch(const char* e)
     {
@@ -74,26 +76,13 @@ void Game::render()
 	SDL_RenderClear(renderer); // clear the renderer to the draw color
 	// draw forest in green
     SDL_SetRenderDrawColor(renderer, 18, 148, 59, 255);
-//	SDL_RenderDrawRects(renderer, forest, forest_size);
 	SDL_RenderFillRects(renderer, forest, forest_size);
 	// draw fire in red
     SDL_SetRenderDrawColor(renderer, 148, 5, 3, 255);
-//	SDL_RenderDrawRects(renderer, fire, fire_size);
 	SDL_RenderFillRects(renderer, fire, fire_size);
 	// draw ash in grey
     SDL_SetRenderDrawColor(renderer, 148, 148, 148, 255);
-//	SDL_RenderDrawRects(renderer, ash, ash_size);
 	SDL_RenderFillRects(renderer, ash, ash_size);
-
-	// draw Position on side
-	// SDL_SetRenderDrawColor(renderer, 0, 0, 0, 148);
-	// SDL_RenderDrawRects(renderer, bigPosRect, bigPosRect_size);
-	// SDL_SetRenderDrawColor(renderer, 255, 255, 255, 148);
-	// SDL_RenderFillRects(renderer, bigPosRect, bigPosRect_size);
-	// SDL_SetRenderDrawColor(renderer, 148, 0, 0, 148);
-	// SDL_RenderDrawRects(renderer, bigPosRect, bigPosRect_size);
-	// SDL_RenderFillRects(renderer, bigPosRect, bigPosRect_size);
-
 
 	SDL_RenderPresent(renderer); // draw to the screen
 }
