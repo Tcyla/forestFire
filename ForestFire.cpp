@@ -110,21 +110,22 @@ ForestFire::ForestFire(int row, int col)
  *********************************************************************/
 
 
-/*
-void setRectAttr(int pixSize, SDL_Rect* state, int& state_size, int i, int j, SDL_Rect view)
+
+void setRectAttr(int pixSize, std::unique_ptr<SDL_Rect[]>& state, int& state_size, int i, int j, SDL_Rect view)
 {
-	state[state_size].h = pixSize;
-	state[state_size].w = pixSize;
-	state[state_size].x = (j - view.x) * pixSize;
-    state[state_size].y = (i - view.y) * pixSize ;
-    ++state_size;
+	(state.get())[state_size].h = pixSize;
+	(state.get())[state_size].w = pixSize;
+	(state.get())[state_size].x = (j - view.x) * pixSize;
+	(state.get())[state_size].y = (i - view.y) * pixSize ;
+	++state_size;
+
 }
-*/
+
 
 void ForestFire::getState(SDL_Rect view, int pixSize,
-						  std::unique_ptr<SDL_Rect[]> &forest, int& forest_size,
-						  std::unique_ptr<SDL_Rect[]> &fire, int& fire_size,
-						  std::unique_ptr<SDL_Rect[]> &ash, int& ash_size)
+						  std::unique_ptr<SDL_Rect[]>& forest, int& forest_size,
+						  std::unique_ptr<SDL_Rect[]>& fire, int& fire_size,
+						  std::unique_ptr<SDL_Rect[]>& ash, int& ash_size)
 {
 
 	forest_size = 0;
@@ -151,35 +152,18 @@ void ForestFire::getState(SDL_Rect view, int pixSize,
 
 			if ( state == 'w' )
 			{
-				// setRectAttr(pixSize, *forest, forest_size, i, j, view);
-
-				(forest_tmp.get())[forest_size].h = pixSize;
-				(forest_tmp.get())[forest_size].w = pixSize;
-				(forest_tmp.get())[forest_size].x = (j - view.x) * pixSize;
-    			(forest_tmp.get())[forest_size].y = (i - view.y) * pixSize ;
-    			++forest_size;
-
+				
+				setRectAttr(pixSize, forest_tmp, forest_size, i, j, view);
+				
 			}else if ( state == 'f' )
 			{
 
-				// setRectAttr(pixSize, *fire, fire_size, i, j, view);
-
-				(fire_tmp.get())[fire_size].h = pixSize;
-				(fire_tmp.get())[fire_size].w = pixSize;
-				(fire_tmp.get())[fire_size].x = (j - view.x) * pixSize;
-    			(fire_tmp.get())[fire_size].y = (i - view.y) * pixSize ;
-    			++fire_size;
+				setRectAttr(pixSize, fire_tmp, fire_size, i, j, view);
 
 			}else if ( state == 'a' )
 			{
 
-				// setRectAttr(pixSize, *ash, ash_size, i, j, view);
-
-				(ash_tmp.get())[ash_size].h = pixSize;
-				(ash_tmp.get())[ash_size].w = pixSize;
-				(ash_tmp.get())[ash_size].x = (j - view.x) * pixSize;
-    			(ash_tmp.get())[ash_size].y = (i - view.y) * pixSize ;
-    			++ash_size;
+				setRectAttr(pixSize, ash_tmp, ash_size, i, j, view);
 
 			}
 		}
