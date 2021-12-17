@@ -25,6 +25,7 @@ snap install cmake
 mkdir build
 cd build/
 cmake ..
+make
 ```
 
 ### Windows
