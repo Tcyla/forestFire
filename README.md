@@ -1,4 +1,4 @@
-# forestFire : a cellular automaton
+# forestFire :evergreen_tree: :fire: : a cellular automaton 
 ## Introduction
 A C++ implementation of [the cellular automata](http://cormas.cirad.fr/fr/applica/fireautomata.htm) developed by the CORMAS. 
 ## Installation
