@@ -34,6 +34,8 @@ make
 
 ## Commands
 
+<kbd> ↑ </kbd> <kbd> ↓ </kbd> <kbd> ← </kbd> <kbd> → </kbd> : move on the grid
+
 <kbd> Left Mouse Button Click </kbd> : Set a tile on fire
 
 <kbd> p </kbd> or <kbd> ↵ </kbd> : Play / Pause 
