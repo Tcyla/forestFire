@@ -111,7 +111,7 @@ ForestFire::ForestFire(int row, int col)
 
 
 
-void setRectAttr(int pixSize, std::unique_ptr<SDL_Rect[]>& state, int& state_size, int i, int j, SDL_Rect view)
+void setRectAttr(int pixSize, std::unique_ptr<SDL_Rect[]>& state, int& state_size, int i, int j, SDL_Rect view) noexcept
 {
 	(state.get())[state_size].h = pixSize;
 	(state.get())[state_size].w = pixSize;
@@ -152,7 +152,7 @@ void ForestFire::getState(SDL_Rect view, int pixSize,
 
 			if ( state == 'w' )
 			{
-				
+
 				setRectAttr(pixSize, forest_tmp, forest_size, i, j, view);
 				
 			}else if ( state == 'f' )
@@ -199,6 +199,7 @@ void ForestFire::step()
 }
 
 
+[[deprecated]]
 void ForestFire::run(int end)
 {
 	while (M_curentTime <= end)
@@ -215,7 +216,7 @@ void ForestFire::reset()
 	M_curentTime = 0;
 }
 
-
+[[deprecated]]
 std::ostream& operator<<(std::ostream& o, ForestFire& g)
 {
 	return o << std::endl << *g.M_matrix << std::endl

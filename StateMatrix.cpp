@@ -134,6 +134,7 @@ void StateMatrix::setCoef(char c, int i, int j)
     }
 }    
 
+[[deprecated]]
 std::ostream& operator<<(std::ostream& o, StateMatrix& M)
 {
 	for( int i = 0; i < M.row() ; ++i)
