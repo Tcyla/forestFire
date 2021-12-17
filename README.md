@@ -33,7 +33,7 @@ cmake ..
 
 ## Commands
 
-<kdb> Left Mouse Click </kbd>
+<kdb> Left Mouse Click </kbd> : Set the tile on fire
 
 <kbd> p </kbd> or <kbd> ↵ </kbd> : Play / Pause 
 
