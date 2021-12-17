@@ -5,6 +5,8 @@
 
 char ForestFire::get_torified_coeffs( int i ,  int j)
 {
+	// The grid is a torus. This function returns 
+	//
 	int x,y;
 
 	if ( i == -1 )

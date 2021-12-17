@@ -5,8 +5,8 @@ View::View(int i, int j)
 {
     // bug when pixSize <= 3
 	M_pixSize = 5;
-	M_view.h = i/M_pixSize;
-	M_view.w = j/M_pixSize;
+	M_view.h = j/M_pixSize;
+	M_view.w = i/M_pixSize;
 
 	// Center
 	M_view.x = 0;

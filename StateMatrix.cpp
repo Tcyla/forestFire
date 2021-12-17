@@ -17,7 +17,8 @@ StateMatrix::StateMatrix(int row, int col)
     {
         M_coeffs[i] = new char[M_col];
     }
-     
+    
+    empty(); // set coeffs to 0
 }
 
 StateMatrix::~StateMatrix()
