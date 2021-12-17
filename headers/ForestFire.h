@@ -1,7 +1,8 @@
 #ifndef __FORESTFIRE__
 #define __FORESTFIRE__
 
-#include<iostream>
+#include <iostream>
+#include <memory>
 #include <SDL2/SDL.h>
 
 #include "StateMatrix.h"
@@ -38,9 +39,9 @@ class ForestFire
 		int col(){ return M_col; }
 		int currentTime() const { return M_curentTime; }
 		void getState(SDL_Rect, int,
-					  SDL_Rect*&, int&,
-					  SDL_Rect*&, int&,
-					  SDL_Rect*&, int&); 
+					  std::shared_ptr<SDL_Rect[]>, int&,
+					  std::shared_ptr<SDL_Rect[]>, int&,
+					  std::shared_ptr<SDL_Rect[]>, int&); 
 		
 		// Setters
 		void setFire(int, int);

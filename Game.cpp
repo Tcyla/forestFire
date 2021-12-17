@@ -50,14 +50,23 @@ Game::Game(const char* title, int xpos, int ypos, int width, int height, int fla
 		fire_size = 0;
 		ash_size = 0;
 
-		forest = new SDL_Rect[2];
-		fire = new SDL_Rect[2];
-		ash = new SDL_Rect[2];
-		std::cout << "forest = " << forest << "\n";
+		forest = std::make_shared<SDL_Rect[]>();
+		fire = std::make_shared<SDL_Rect[]>();
+		ash = std::make_shared<SDL_Rect[]>();
 
 		view -> getView(forest, forest_size, fire, fire_size, ash, ash_size);
+		
 
-		std::cout << "forest = " << forest << "\n";
+		for (int i = 0; i < forest_size; ++i)
+		{
+
+			std::cerr << "forest[" << i << "] = {" << std::endl
+					  << "                      x : " << (forest.get())[i].x << std::endl
+					  << "                      y : "<< (forest.get())[i].y << std::endl
+					  << "                      h : "<< (forest.get())[i].h << std::endl
+					  << "                      w : "<< (forest.get())[i].w << std::endl
+					  << "                                 }\n";
+		}
 
     }catch(const char* e)
     {
@@ -76,13 +85,13 @@ void Game::render()
 	SDL_RenderClear(renderer); // clear the renderer to the draw color
 	// draw forest in green
     SDL_SetRenderDrawColor(renderer, 18, 148, 59, 255);
-	SDL_RenderFillRects(renderer, forest, forest_size);
+	SDL_RenderFillRects(renderer, forest.get(), forest_size);
 	// draw fire in red
     SDL_SetRenderDrawColor(renderer, 148, 5, 3, 255);
-	SDL_RenderFillRects(renderer, fire, fire_size);
+	SDL_RenderFillRects(renderer, fire.get(), fire_size);
 	// draw ash in grey
     SDL_SetRenderDrawColor(renderer, 148, 148, 148, 255);
-	SDL_RenderFillRects(renderer, ash, ash_size);
+	SDL_RenderFillRects(renderer, ash.get(), ash_size);
 
 	SDL_RenderPresent(renderer); // draw to the screen
 }
@@ -196,9 +205,6 @@ void Game::handleEvents()
 
 Game::~Game()
 {
-	delete [] forest;
-	delete [] fire;
-	delete [] ash;
     delete view;
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
