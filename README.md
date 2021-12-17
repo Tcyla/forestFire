@@ -34,7 +34,9 @@ cmake ..
 ## Commands
 
 <kbd> left mouse click </kbd> : Set a tile on fire
+
 <kbd> p </kbd> or <kbd> enter </kbd> : Play / Pause 
+
 <kbd> esc </kbd> : Stop
 
 ## Sources
