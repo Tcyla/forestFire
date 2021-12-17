@@ -2,6 +2,7 @@
 #define __GAME__
 
 #include <iostream>
+#include <memory>
 #include <SDL2/SDL.h>
 
 #include "View.h"
@@ -17,13 +18,13 @@ class Game
 		View* view;
 
 		//
-		SDL_Rect* forest; 
+		std::unique_ptr<SDL_Rect[]> forest; 
 		int forest_size;
 		//
-		SDL_Rect* fire; 
+		std::unique_ptr<SDL_Rect[]> fire; 
 		int fire_size;
 		//
-		SDL_Rect* ash; 
+		std::unique_ptr<SDL_Rect[]> ash; 
 		int ash_size;
 
 		bool M_isRunning;

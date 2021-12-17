@@ -2,6 +2,7 @@
 #define __VIEW__
 
 #include <iostream>
+#include <memory>
 #include <SDL2/SDL.h>
 
 #include "ForestFire.h"
@@ -38,9 +39,9 @@ class View
 			forestfire -> setFire(y/M_pixSize,x/M_pixSize);
 		}
 
-        void getView(SDL_Rect* forest, int& forest_size,
-					 SDL_Rect* fire, int& fire_size,
-					 SDL_Rect* ash, int& ash_size)
+        void getView(std::unique_ptr<SDL_Rect[]> &forest, int& forest_size,
+					 std::unique_ptr<SDL_Rect[]> &fire, int& fire_size,
+					 std::unique_ptr<SDL_Rect[]> &ash, int& ash_size)
 		{
 			forestfire -> getState(M_view, M_pixSize,
 						  		   forest, forest_size,

@@ -46,16 +46,12 @@ Game::Game(const char* title, int xpos, int ypos, int width, int height, int fla
 
 		view = new View(width, height);
 
-		forest_size = 0;
-		fire_size = 0;
-		ash_size = 0;
-
-		forest = new SDL_Rect[100000];
-		fire = new SDL_Rect[10000];
-		ash = new SDL_Rect[10000];
-
+		forest = std::make_unique<SDL_Rect[]>(1);
+		fire = std::make_unique<SDL_Rect[]>(1);
+		ash = std::make_unique<SDL_Rect[]>(1);
 
 		view -> getView(forest, forest_size, fire, fire_size, ash, ash_size);
+		
 
     }catch(const char* e)
     {
@@ -74,26 +70,13 @@ void Game::render()
 	SDL_RenderClear(renderer); // clear the renderer to the draw color
 	// draw forest in green
     SDL_SetRenderDrawColor(renderer, 18, 148, 59, 255);
-//	SDL_RenderDrawRects(renderer, forest, forest_size);
-	SDL_RenderFillRects(renderer, forest, forest_size);
+	SDL_RenderFillRects(renderer, forest.get(), forest_size);
 	// draw fire in red
     SDL_SetRenderDrawColor(renderer, 148, 5, 3, 255);
-//	SDL_RenderDrawRects(renderer, fire, fire_size);
-	SDL_RenderFillRects(renderer, fire, fire_size);
+	SDL_RenderFillRects(renderer, fire.get(), fire_size);
 	// draw ash in grey
     SDL_SetRenderDrawColor(renderer, 148, 148, 148, 255);
-//	SDL_RenderDrawRects(renderer, ash, ash_size);
-	SDL_RenderFillRects(renderer, ash, ash_size);
-
-	// draw Position on side
-	// SDL_SetRenderDrawColor(renderer, 0, 0, 0, 148);
-	// SDL_RenderDrawRects(renderer, bigPosRect, bigPosRect_size);
-	// SDL_SetRenderDrawColor(renderer, 255, 255, 255, 148);
-	// SDL_RenderFillRects(renderer, bigPosRect, bigPosRect_size);
-	// SDL_SetRenderDrawColor(renderer, 148, 0, 0, 148);
-	// SDL_RenderDrawRects(renderer, bigPosRect, bigPosRect_size);
-	// SDL_RenderFillRects(renderer, bigPosRect, bigPosRect_size);
-
+	SDL_RenderFillRects(renderer, ash.get(), ash_size);
 
 	SDL_RenderPresent(renderer); // draw to the screen
 }
@@ -207,9 +190,6 @@ void Game::handleEvents()
 
 Game::~Game()
 {
-	delete [] forest;
-	delete [] fire;
-	delete [] ash;
     delete view;
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
