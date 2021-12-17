@@ -33,6 +33,8 @@ cmake ..
 
 ## Commands
 
+<kdb> Left Mouse Click </kbd>
+
 <kbd> p </kbd> or <kbd> ↵ </kbd> : Play / Pause 
 
 <kbd> esc </kbd> : Stop
