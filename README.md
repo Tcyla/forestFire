@@ -1,6 +1,6 @@
 # forestFire :evergreen_tree: :fire: : a cellular automaton 
 ## Introduction
-A C++ implementation of [the cellular automata](http://cormas.cirad.fr/fr/applica/fireautomata.htm) developed by the CORMAS. 
+A C++ implementation of [the cellular automata](http://cormas.cirad.fr/fr/applica/fireautomata.htm) developed by the CORMAS. (Only the first model is curently available.)
 ## Installation
 This program have only be tested on Ubuntu 20.10. 
 ### Linux
