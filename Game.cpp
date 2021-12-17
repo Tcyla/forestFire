@@ -46,27 +46,12 @@ Game::Game(const char* title, int xpos, int ypos, int width, int height, int fla
 
 		view = new View(width, height);
 
-		forest_size = 0;
-		fire_size = 0;
-		ash_size = 0;
-
-		forest = std::make_shared<SDL_Rect[]>();
-		fire = std::make_shared<SDL_Rect[]>();
-		ash = std::make_shared<SDL_Rect[]>();
+		forest = std::make_unique<SDL_Rect[]>(1);
+		fire = std::make_unique<SDL_Rect[]>(1);
+		ash = std::make_unique<SDL_Rect[]>(1);
 
 		view -> getView(forest, forest_size, fire, fire_size, ash, ash_size);
 		
-
-		for (int i = 0; i < forest_size; ++i)
-		{
-
-			std::cerr << "forest[" << i << "] = {" << std::endl
-					  << "                      x : " << (forest.get())[i].x << std::endl
-					  << "                      y : "<< (forest.get())[i].y << std::endl
-					  << "                      h : "<< (forest.get())[i].h << std::endl
-					  << "                      w : "<< (forest.get())[i].w << std::endl
-					  << "                                 }\n";
-		}
 
     }catch(const char* e)
     {

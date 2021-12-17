@@ -122,9 +122,9 @@ void setRectAttr(int pixSize, SDL_Rect* state, int& state_size, int i, int j, SD
 */
 
 void ForestFire::getState(SDL_Rect view, int pixSize,
-						  std::shared_ptr<SDL_Rect[]> forest, int& forest_size,
-						  std::shared_ptr<SDL_Rect[]> fire, int& fire_size,
-						  std::shared_ptr<SDL_Rect[]> ash, int& ash_size)
+						  std::unique_ptr<SDL_Rect[]> &forest, int& forest_size,
+						  std::unique_ptr<SDL_Rect[]> &fire, int& fire_size,
+						  std::unique_ptr<SDL_Rect[]> &ash, int& ash_size)
 {
 
 	forest_size = 0;
@@ -185,17 +185,6 @@ void ForestFire::getState(SDL_Rect view, int pixSize,
 		}
 
 	}
-
-	for (int i = 0; i < forest_size; ++i)
-		{
-
-			std::cout << "forest_tmp[" << i << "] = {" << std::endl
-					  << "                      x : " << (forest_tmp.get())[i].x << std::endl
-					  << "                      y : "<< (forest_tmp.get())[i].y << std::endl
-					  << "                      h : "<< (forest_tmp.get())[i].h << std::endl
-					  << "                      w : "<< (forest_tmp.get())[i].w << std::endl
-					  << "                                 }\n";
-		}
 
 	forest = std::move(forest_tmp);
 	fire = std::move(fire_tmp);

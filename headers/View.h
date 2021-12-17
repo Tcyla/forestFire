@@ -39,9 +39,9 @@ class View
 			forestfire -> setFire(y/M_pixSize,x/M_pixSize);
 		}
 
-        void getView(std::shared_ptr<SDL_Rect[]> forest, int& forest_size,
-					 std::shared_ptr<SDL_Rect[]> fire, int& fire_size,
-					 std::shared_ptr<SDL_Rect[]> ash, int& ash_size)
+        void getView(std::unique_ptr<SDL_Rect[]> &forest, int& forest_size,
+					 std::unique_ptr<SDL_Rect[]> &fire, int& fire_size,
+					 std::unique_ptr<SDL_Rect[]> &ash, int& ash_size)
 		{
 			forestfire -> getState(M_view, M_pixSize,
 						  		   forest, forest_size,
