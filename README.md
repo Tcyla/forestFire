@@ -45,7 +45,7 @@ make
 ## Evolutions
 I'm currently trying to improve the programm speed by introducing multiprocessing in the calculation of the state matrix. I am testing several solution:  
 1. Using only C++ threading library.
-2. Using CUDA C for GPU computing.
+2. Using CUDA C for GPU computing (but only on Nvidia GPU).
     
 
 ## Sources
