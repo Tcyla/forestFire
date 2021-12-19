@@ -202,7 +202,7 @@ void ForestFire::step_thread_handler(int current_thread, int max_threads)
 
 void ForestFire::step()
 {
-	int max_threads = 20;
+	int max_threads = 8;
 	std::vector<std::thread> thread_list; // empty vector of thread
 
 	for (int i = 0 ; i < max_threads ; ++i)
