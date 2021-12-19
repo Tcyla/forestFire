@@ -42,5 +42,10 @@ make
 
 <kbd> esc </kbd> : Stop
 
+## Evolutions
+I'm currently trying to improve the programm speed by introducing multiprocessing in the calculation of the state matrix. I am testing several solution:  
+    * Using only C++ threading library.
+    * Using CUDA C for GPU computing.
+
 ## Sources
 Christophe Le Page, François Bousquet, Pierre Bommel, *Cellular automata of a forest fire*, http://cormas.cirad.fr/en/applica/fireautomata.htm
