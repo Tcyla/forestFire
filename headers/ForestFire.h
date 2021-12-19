@@ -43,9 +43,9 @@ class ForestFire
 		int col(){ return M_col; }
 		int currentTime() const { return M_curentTime; }
 		void getState(SDL_Rect, int,
-					  std::unique_ptr<SDL_Rect[]>&, int&,
-					  std::unique_ptr<SDL_Rect[]>&, int&,
-					  std::unique_ptr<SDL_Rect[]>&, int&); 
+					  std::unique_ptr<SDL_Rect[]>&, long&,
+					  std::unique_ptr<SDL_Rect[]>&, long&,
+					  std::unique_ptr<SDL_Rect[]>&, long&); 
 		
 		// Setters
 		void setFire(int, int);

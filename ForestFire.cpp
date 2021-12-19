@@ -113,7 +113,7 @@ ForestFire::ForestFire(int row, int col)
 
 
 
-void setRectAttr(int pixSize, std::unique_ptr<SDL_Rect[]>& state, int& state_size, int i, int j, SDL_Rect view) noexcept
+void setRectAttr(int pixSize, std::unique_ptr<SDL_Rect[]>& state, long& state_size, int i, int j, SDL_Rect view) noexcept
 {
 	(state.get())[state_size].h = pixSize;
 	(state.get())[state_size].w = pixSize;
@@ -125,9 +125,9 @@ void setRectAttr(int pixSize, std::unique_ptr<SDL_Rect[]>& state, int& state_siz
 
 
 void ForestFire::getState(SDL_Rect view, int pixSize,
-						  std::unique_ptr<SDL_Rect[]>& forest, int& forest_size,
-						  std::unique_ptr<SDL_Rect[]>& fire, int& fire_size,
-						  std::unique_ptr<SDL_Rect[]>& ash, int& ash_size)
+						  std::unique_ptr<SDL_Rect[]>& forest, long& forest_size,
+						  std::unique_ptr<SDL_Rect[]>& fire, long& fire_size,
+						  std::unique_ptr<SDL_Rect[]>& ash, long& ash_size)
 {
 
 	forest_size = 0;

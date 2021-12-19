@@ -19,13 +19,13 @@ class Game
 
 		//
 		std::unique_ptr<SDL_Rect[]> forest; 
-		int forest_size;
+		long forest_size;
 		//
 		std::unique_ptr<SDL_Rect[]> fire; 
-		int fire_size;
+		long fire_size;
 		//
 		std::unique_ptr<SDL_Rect[]> ash; 
-		int ash_size;
+		long ash_size;
 
 		bool M_isRunning;
 		bool pause;

@@ -91,7 +91,7 @@ char StateMatrix::operator()(int i, int j)
 		return M_coeffs[i][j];
 }
 
-void StateMatrix::inc_dec(bool inc, int& count)
+void StateMatrix::inc_dec(bool inc, long& count)
 {
     if (inc) // if inc true add 1
         ++count;
