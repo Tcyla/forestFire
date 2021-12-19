@@ -14,11 +14,11 @@ class StateMatrix
 	int M_col;
 	int M_row;
 
-	int forest_count;
-	int fire_count;
-	int ash_count;
+	long forest_count;
+	long fire_count;
+	long ash_count;
 
-	void inc_dec(bool, int&);
+	void inc_dec(bool, long&);
 	void modStateCount(bool, int, int);
 
 public:
