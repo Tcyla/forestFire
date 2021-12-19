@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <memory>
+#include <thread>
+#include <vector>
 #include <SDL2/SDL.h>
 
 #include "StateMatrix.h"
@@ -22,6 +24,8 @@ class ForestFire
 		char rule( int,  int );
 
 		void swap_buffer();
+
+		void step_thread_handler(int, int);
 	
     public:
 

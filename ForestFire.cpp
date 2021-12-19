@@ -183,19 +183,41 @@ void ForestFire::setFire(int i, int j)
     M_matrix -> setCoef('f', i, j);
 }
 
-
-void ForestFire::step()
+void ForestFire::step_thread_handler(int current_thread, int max_threads)
 {
 	char state;
 	for (int i = 0; i < M_row; ++i)
 	{
 		for (int j = 0 ; j < M_col ; ++j)
 		{
-			state = rule(i,j);
-			M_matrixBuffer -> setCoef(state, i, j);
+			if ( j % max_threads == current_thread)
+			{
+				state = rule(i,j);
+				M_matrixBuffer -> setCoef(state, i, j);
+			}
 		}
 	}
 
+}
+
+void ForestFire::step()
+{
+	int max_threads = 20;
+	std::vector<std::thread> thread_list; // empty vector of thread
+
+	for (int i = 0 ; i < max_threads ; ++i)
+	{
+		// execute ForestFire::rule() on max_threads different threads  
+		thread_list.push_back(std::thread(
+			[this](int i, int max_threads)
+			{
+				ForestFire::step_thread_handler(i, max_threads);
+			}, i, max_threads
+		));
+	}
+
+	for (auto& th : thread_list) th.join(); // waiting for all the threads to join
+	
 	swap_buffer();
 	++M_curentTime;
 }
