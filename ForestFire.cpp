@@ -1,79 +1,8 @@
 #include "headers/ForestFire.h"
+#include "rule.cu"
 
 // Private
 // -------
-
-char ForestFire::get_torified_coeffs( int i ,  int j)
-{
-	// The grid is a torus. This function returns 
-	//
-	int x,y;
-
-	if ( i == -1 )
-		x = M_row - 1;
-	else if ( i == M_row )
-		x = 0;
-	else
-		x = i;
-
-	if ( j == -1 )
-		y = M_col - 1;
-	else if ( j == M_col )
-		y = 0;
-	else
-		y = j;
-
-	return (*M_matrix)(x,y);
-}
-
-char ForestFire::rule(int i, int j)
-{
-	/*
-	 * rules are:
-	 * 1) if a fire tile is in the neighbourhood of a forest tile then
-	 *    the forest tile is set on fire.
-	 * 2) if fire then ash.
-	 */
-
-	char res;
-	try
-	{
-		res = (*M_matrix)(i,j);
-	}
-	catch (const char* e)
-	{
-		throw e;
-	}
-	// table of the surrounding cells
-	char tab[8] = {
-		get_torified_coeffs(i-1, j-1), get_torified_coeffs(i-1, j),
-		get_torified_coeffs(i-1, j+1), get_torified_coeffs(i, j-1),
-		get_torified_coeffs(i, j+1), get_torified_coeffs(i+1, j-1),
-		get_torified_coeffs(i+1, j), get_torified_coeffs(i+1, j+1)
-	};
-
-	// counting the living cells
-	bool fire_around = false;
-	for (int k = 0; k < 8; ++k)
-	{
-		if ( tab[k] == 'f' )
-		{
-			fire_around = true;
-			break;
-		}
-	}
-
-	// checking if the cell lives
-	if ( (*M_matrix)(i,j) == 'w' && fire_around )
-	{
-		res = 'f';
-	}else if ( (*M_matrix)(i,j) == 'f' )
-	{
-		res = 'a';
-	}
-
-	return res;
-}
 
 void ForestFire::swap_buffer()
 {
@@ -186,42 +115,15 @@ void ForestFire::setFire(int i, int j)
 
 void ForestFire::step()
 {
-	char state;
-	for (int i = 0; i < M_row; ++i)
-	{
-		for (int j = 0 ; j < M_col ; ++j)
-		{
-			state = rule(i,j);
-			M_matrixBuffer -> setCoef(state, i, j);
-		}
-	}
-
+	rule_applied( M_matrixBuffer -> c_matrixptr(), M_matrixBuffer -> row(), M_matrixBuffer -> col() );
 	swap_buffer();
 	++M_curentTime;
 }
 
 
-[[deprecated]]
-void ForestFire::run(int end)
-{
-	while (M_curentTime <= end)
-	{
-		std::cout << "\033c" << *this << std::endl;
-		this -> step();
-		SDL_Delay(1000);
-	}
-}
-
 void ForestFire::reset()
 {
 	M_matrix -> randomize();
 	M_curentTime = 0;
-}
-
-[[deprecated]]
-std::ostream& operator<<(std::ostream& o, ForestFire& g)
-{
-	return o << std::endl << *g.M_matrix << std::endl
-			 << "t = " << g.M_curentTime << std::endl;
 }
 

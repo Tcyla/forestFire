@@ -45,6 +45,8 @@ public:
 	int fire() const { return fire_count; }
 	int ash() const { return forest_count; }
 
+	auto c_matrixptr(){ return &M_coeffs; }
+
 	// .. Assimilées
 
 	int size() const { return M_row * M_col; }
@@ -55,7 +57,5 @@ public:
 	void setCoef(char, int, int);
 
 };
-
-std::ostream& operator<<( std::ostream&, StateMatrix& );
 
 #endif

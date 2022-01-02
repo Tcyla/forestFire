@@ -7,7 +7,6 @@
 
 #include "StateMatrix.h"
 
-
 class ForestFire
 {
     private:
